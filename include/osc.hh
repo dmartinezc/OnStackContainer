@@ -1,5 +1,5 @@
-#include <cstddef> // for std::size_t
-#include <cassert> // 
+#include <cstddef> /// for std::size_t
+#include <cassert> // for debug purposes
 
 namespace osc {
 
@@ -8,15 +8,18 @@ namespace osc {
 namespace impl {
 
 /// Manages the push/pop of the stack pointer
-///@param sz: size in bytes of an unit object 
+///@param sz: size in bytes of an unit object
 template<std::size_t sz>
 class Arena {
+
 public:
     Arena() : size(0) {
 #ifndef NDEBUG
     std::size_t _oldStackPos;
-#endif        
+#endif
     }
+
+    /// restore stack pointer
     ~Arena() {
     ///@todo restore stack pointer
 #ifndef NDEBUG
@@ -48,7 +51,7 @@ public:
     Vector() : size(0 ), arena()
         {}
 
-// Element access 
+// Element access
     /// at()
     // operator[]
     // front()
@@ -73,4 +76,4 @@ private:
     impl::Arena<sizeof(T)> arena;
 };
 
-}
+} // namespace osc
